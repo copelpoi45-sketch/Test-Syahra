@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valentine Card 💘</title>
+  <style>
+    :root{
+      --bg1:#14001b;
+      --bg2:#2a0036;
+      --card:#190021cc;
+      --text:#fff1f2;
+      --muted:#fecdd3;
+      --accent:#fb7185;
+      --accent2:#c084fc;
+      --accent3:#22c55e;
+      --line:#ffffff20;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(1100px 700px at 10% 15%, #fb718533, transparent 60%),
+        radial-gradient(900px 650px at 90% 25%, #c084fc33, transparent 55%),
+        radial-gradient(900px 650px at 55% 92%, #22c55e22, transparent 55%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    .hearts{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:10;
+      overflow:hidden;
+    }
+    .heart{
+      position:absolute;
+      width:18px;
+      height:18px;
+      transform: rotate(45deg);
+      opacity:.9;
+      filter: drop-shadow(0 10px 10px rgba(0,0,0,.35));
+      animation: floatUp linear forwards;
+    }
+    .heart::before, .heart::after{
+      content:"";
+      position:absolute;
+      width:18px;
+      height:18px;
+      border-radius:50%;
+      background:inherit;
+    }
+    .heart::before{ left:-9px; top:0; }
+    .heart::after{ left:0; top:-9px; }
+
+    @keyframes floatUp{
+      0%{ transform:translateY(0) rotate(45deg) scale(.9); opacity:0; }
+      10%{ opacity:.95; }
+      100%{ transform:translateY(-120vh) rotate(45deg) scale(1.2); opacity:0; }
+    }
+
+    .wrap{
+      max-width:1000px;
+      margin:0 auto;
+      padding:26px 18px 70px;
+      position:relative;
+      z-index:20;
+    }
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.2px;
+      opacity:.95;
+    }
+    .pill{
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#ffffff0a;
+      backdrop-filter: blur(10px);
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+    }
+    @media (max-width: 880px){
+      .grid{ grid-template-columns:1fr; }
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background:var(--card);
+      border-radius:22px;
+      padding:18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero{
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-50px;
+      background:
+        radial-gradient(140px 140px at 18% 28%, #fb718555, transparent 70%),
+        radial-gradient(160px 160px at 90% 18%, #c084fc44, transparent 70%),
+        radial-gradient(180px 180px at 55% 90%, #22c55e22, transparent 70%);
+      opacity:.9;
+      pointer-events:none;
+      filter: blur(2px);
+    }
+    .hero > *{ position:relative; }
+
+    h1{
+      margin:0;
+      font-size: clamp(28px, 4.2vw, 50px);
+      line-height:1.05;
+    }
+    .sub{
+      margin:10px 0 0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+      max-width:60ch;
+    }
+
+    .field{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .input{
+      flex:1 1 200px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid #ffffff22;
+      background:#00000012;
+    }
+    input, select{
+      width:100%;
+      border:0;
+      outline:none;
+      background:transparent;
+      color:var(--text);
+      font-size:15px;
+    }
+    select option{ color:#111; }
+
+    .row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+      align-items:center;
+    }
+    button{
+      appearance:none;
+      border:0;
+      cursor:pointer;
+      border-radius:16px;
+      padding:12px 14px;
+      font-weight:750;
+      color:var(--text);
+      background: linear-gradient(135deg, var(--accent), #ef4444);
+      box-shadow: 0 10px 30px rgba(0,0,0,.5);
+      transition: transform .08s ease, filter .2s ease;
+    }
+    button:hover{ filter:brightness(1.05); }
+    button:active{ transform: translateY(1px) scale(.99); }
+    .btn2{ background: linear-gradient(135deg, var(--accent2), #60a5fa); }
+    .btn3{ background: linear-gradient(135deg, var(--accent3), #14b8a6); }
+
+    textarea{
+      width:100%;
+      min-height:140px;
+      resize:vertical;
+      padding:12px 12px;
+      border-radius:18px;
+      border:1px solid #ffffff22;
+      background:#00000014;
+      color:var(--text);
+      outline:none;
+      line-height:1.55;
+      font-size:14px;
+    }
+
+    .preview{
+      margin-top:12px;
+      padding:14px;
+      border-radius:18px;
+      border:1px solid #ffffff18;
+      background:#ffffff0a;
+      line-height:1.7;
+      white-space:pre-wrap;
+    }
+
+    .chips{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .chip{
+      border:1px solid #ffffff22;
+      background:#ffffff0a;
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      color:#ffd5de;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease, filter .2s ease;
+    }
+    .chip:hover{ filter: brightness(1.08); }
+    .chip:active{ transform: translateY(1px); }
+
+    .footer{
+      margin-top:14px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      color:#ffd5debb;
+      font-size:12px;
+    }
+
+    /* Modal */
+    .modalBack{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:#00000088;
+      z-index:80;
+      padding:18px;
+    }
+    .modal{
+      max-width:520px;
+      width:100%;
+      border-radius:22px;
+      border:1px solid #ffffff24;
+      background:#120016f2;
+      padding:18px;
+      box-shadow: 0 18px 70px rgba(0,0,0,.7);
+      backdrop-filter: blur(10px);
+    }
+    .modal h3{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+    .modal p{
+      margin:0 0 12px;
+      color:#ffd5de;
+      line-height:1.6;
+      font-size:14px;
+    }
+    .modal .row{ margin-top:10px; justify-content:flex-end; }
+
+    /* Toast */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform:translateX(-50%);
+      background:#120016e6;
+      border:1px solid #ffffff1f;
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      box-shadow:0 12px 40px rgba(0,0,0,.66);
+      font-size:13px;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .25s ease, transform .25s ease;
+      z-index:90;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(-4px);
+    }
+
+    .small{
+      font-size:12px;
+      color:#ffd5decc;
+      margin-top:8px;
+      line-height:1.55;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hearts" id="hearts"></div>
+  <div class="toast" id="toast">💘</div>
+
+  <div class="modalBack" id="modalBack" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h3 id="modalTitle">Surprise! 💝</h3>
+      <p id="modalBody">—</p>
+      <div class="row">
+        <button class="btn2" id="btnClose">Tutup</button>
+      </div>
+      <div class="small" id="modalHint"></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header>
+      <div class="brand"><span style="font-size:18px">💘</span> <span>Valentine Card</span></div>
+      <div class="pill" id="datePill">—</div>
+    </header>
+
+    <div class="grid">
+      <section class="card hero">
+        <h1>
+          Happy Valentine, <span id="who">Kamu</span> 💌
+        </h1>
+        <p class="sub" id="subtitle">
+          Hari ini, aku cuma mau bilang: kamu itu spesial. Semoga kamu merasa disayang (banyak!). 🌹
+        </p>
+
+        <div class="field">
+          <div class="input" title="Nama penerima">
+            <span>👤</span>
+            <input id="nameInput" placeholder="Nama (mis. Rani)" maxlength="30" />
+          </div>
+
+          <div class="input" title="Pilih mood kartu">
+            <span>🎭</span>
+            <select id="moodSelect">
+              <option value="sweet">Sweet</option>
+              <option value="funny">Funny</option>
+              <option value="formal">Formal</option>
+              <option value="crush">Buat Gebetan</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <button id="btnConfess">Confess 💘</button>
+          <button class="btn2" id="btnCopy">Salin Ucapan 📋</button>
+          <button class="btn3" id="btnShare">Bagikan Link 🔗</button>
+        </div>
+
+        <div class="chips" aria-label="Template cepat">
+          <div class="chip" data-tpl="sweet">✨ Sweet</div>
+          <div class="chip" data-tpl="funny">😂 Funny</div>
+          <div class="chip" data-tpl="formal">🕴️ Formal</div>
+          <div class="chip" data-tpl="crush">😳 Gebetan</div>
+        </div>
+
+        <div class="small">
+          Tip: klik <b>Confess</b> untuk animasi + “surprise message”. Tombol <b>Bagikan</b> bikin link dengan nama & pesan otomatis.
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2 style="margin:0 0 10px; font-size:18px;">Pesan Kamu</h2>
+        <textarea id="msgInput">Makasih ya sudah jadi alasan kecilku buat senyum. Semoga hari ini kamu bahagia. 💗</textarea>
+        <div class="preview" id="preview"></div>
+
+        <div class="footer">
+          <div>Made with 💞</div>
+          <div id="counter">0x confess</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+
+    const datePill = $("#datePill");
+    const nameInput = $("#nameInput");
+    const moodSelect = $("#moodSelect");
+    const msgInput = $("#msgInput");
+    const preview = $("#preview");
+    const who = $("#who");
+    const subtitle = $("#subtitle");
+    const hearts = $("#hearts");
+    const toast = $("#toast");
+    const counterEl = $("#counter");
+
+    const modalBack = $("#modalBack");
+    const modalTitle = $("#modalTitle");
+    const modalBody = $("#modalBody");
+    const modalHint = $("#modalHint");
+    const btnClose = $("#btnClose");
+
+    // ===== Date pill =====
+    datePill.textContent = new Intl.DateTimeFormat("id-ID", {
+      weekday:"long", year:"numeric", month:"long", day:"numeric"
+    }).format(new Date());
+
+    // ===== Toast =====
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=>toast.classList.remove("show"), 1400);
+    }
+
+    // ===== Tiny beep (no file) =====
+    function beep(){
+      try{
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = "sine";
+        o.frequency.value = 880;
+        g.gain.value = 0.04;
+        o.connect(g); g.connect(ctx.destination);
+        o.start();
+        setTimeout(()=>{ o.stop(); ctx.close(); }, 110);
+      }catch(e){}
+    }
+
+    // ===== Templates =====
+    const templates = {
+      sweet: (n)=>`Kamu itu bagian favorit dari hari-hariku. Terima kasih sudah hadir. Selamat Valentine, ${n}! 💗`,
+      funny: (n)=>`Selamat Valentine, ${n}! Aku bukan cokelat, tapi aku bisa bikin kamu manis (katanya). 🍫😄`,
+      formal:(n)=>`Selamat Hari Valentine, ${n}. Semoga hari ini dipenuhi kebahagiaan, ketenangan, dan hal-hal baik. 🌹`,
+      crush: (n)=>`Aku nggak jago kode perasaan… tapi kalau boleh jujur, aku suka kamu, ${n}. 😳💘`
+    };
+
+    const surpriseLines = {
+      sweet: (n)=>`Kalau kamu lagi capek, ingat ya: kamu disayang. Aku bangga sama kamu, ${n}.`,
+      funny: (n)=>`Plot twist: kamu adalah “bug” favoritku—soalnya bikin aku kepikiran terus. 😆`,
+      formal:(n)=>`Terima kasih atas segala kebaikanmu. Semoga hubungan dan harimu selalu diberkahi.`,
+      crush: (n)=>`Kalau kamu berkenan, boleh nggak… kita lebih sering ngobrol? 🙂`
+    };
+
+    function currentName(){
+      return (nameInput.value || "Kamu").trim();
+    }
+
+    function applyMood(m){
+      const n = currentName();
+      moodSelect.value = m;
+      msgInput.value = templates[m](n);
+      setSubtitle();
+      setPreview();
+      showToast("✅ Template dipakai!");
+      beep();
+      burstHearts(14);
+    }
+
+    // ===== Preview + title =====
+    function setSubtitle(){
+      const n = currentName();
+      const mood = moodSelect.value;
+      const map = {
+        sweet: `Hari ini, aku cuma mau bilang: ${n} itu spesial. Semoga kamu merasa disayang (banyak!). 🌹`,
+        funny: `Hari Valentine, waktunya serius… bercanda! Semoga ${n} ketawa hari ini. 😄🌹`,
+        formal:`Semoga Hari Valentine membawa kedamaian, kebahagiaan, dan apresiasi untuk ${n}. 🌹`,
+        crush: `Oke ini deg-degan… tapi ${n}, aku punya sesuatu buat kamu. 😳💌`
+      };
+      subtitle.textContent = map[mood] || map.sweet;
+    }
+
+    function setPreview(){
+      const n = currentName();
+      who.textContent = n;
+
+      const msg = msgInput.value.trim();
+      preview.textContent =
+`Untuk ${n}:
+
+${msg}
+
+— Dari aku 💘`;
+    }
+
+    // ===== URL share =====
+    function syncFromURL(){
+      const p = new URLSearchParams(location.search);
+      const n = p.get("nama");
+      const m = p.get("pesan");
+      const mood = p.get("mood");
+      if(n) nameInput.value = decodeURIComponent(n);
+      if(m) msgInput.value = decodeURIComponent(m);
+      if(mood && ["sweet","funny","formal","crush"].includes(mood)) moodSelect.value = mood;
+      setSubtitle();
+      setPreview();
+    }
+
+    function makeShareURL(){
+      const n = encodeURIComponent(currentName());
+      const m = encodeURIComponent((msgInput.value || "").trim());
+      const mood = encodeURIComponent(moodSelect.value);
+      const url = new URL(location.href);
+      url.searchParams.set("nama", n);
+      url.searchParams.set("pesan", m);
+      url.searchParams.set("mood", mood);
+      return url.toString();
+    }
+
+    // ===== Copy =====
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        return true;
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand("copy");
+        ta.remove();
+        return ok;
+      }
+    }
+
+    // ===== Floating hearts =====
+    function spawnHeart(x){
+      const el = document.createElement("div");
+      el.className = "heart";
+      const size = Math.floor(12 + Math.random()*16);
+      const hue = 330 + Math.random()*20; // pink-ish
+      const dur = 3.5 + Math.random()*2.2;
+
+      el.style.left = x + "px";
+      el.style.bottom = "-30px";
+      el.style.width = size + "px";
+      el.style.height = size + "px";
+      el.style.background = `hsl(${hue} 85% 65%)`;
+      el.style.animationDuration = dur + "s";
+      el.style.opacity = (0.75 + Math.random()*0.25).toFixed(2);
+
+      // Slight drift
+      const drift = (-40 + Math.random()*80);
+      el.animate([
+        { transform:`translateX(0) rotate(45deg) scale(.9)` },
+        { transform:`translateX(${drift}px) rotate(45deg) scale(1.2)` }
+      ], { duration: dur*1000, easing:"linear", fill:"forwards" });
+
+      hearts.appendChild(el);
+      setTimeout(()=> el.remove(), dur*1000 + 200);
+    }
+
+    function burstHearts(count=18){
+      const w = window.innerWidth;
+      for(let i=0;i<count;i++){
+        setTimeout(()=> spawnHeart(Math.random()*w), i*40);
+      }
+    }
+
+    // also spawn hearts on click anywhere (fun)
+    window.addEventListener("pointerdown", (e)=>{
+      spawnHeart(e.clientX);
+    });
+
+    // ===== Modal =====
+    function openModal(title, body, hint=""){
+      modalTitle.textContent = title;
+      modalBody.textContent = body;
+      modalHint.textContent = hint;
+      modalBack.style.display = "flex";
+    }
+    function closeModal(){
+      modalBack.style.display = "none";
+    }
+    modalBack.addEventListener("click", (e)=>{
+      if(e.target === modalBack) closeModal();
+    });
+    btnClose.addEventListener("click", closeModal);
+
+    // ===== Counter (local) =====
+    function bumpCounter(){
+      const key = "valentine_confess_count";
+      const v = Number(localStorage.getItem(key) || "0") + 1;
+      localStorage.setItem(key, String(v));
+      counterEl.textContent = `${v}x confess`;
+    }
+    function loadCounter(){
+      const v = Number(localStorage.getItem("valentine_confess_count") || "0");
+      counterEl.textContent = `${v}x confess`;
+    }
+
+    // ===== Buttons =====
+    $("#btnConfess").addEventListener("click", ()=>{
+      setSubtitle(); setPreview();
+      burstHearts(28);
+      beep();
+      bumpCounter();
+      showToast("💘 Confess mode!");
+
+      const n = currentName();
+      const mood = moodSelect.value;
+      openModal(
+        "Surprise! 💝",
+        surpriseLines[mood](n),
+        "Pro tip: klik Bagikan untuk buat link ucapan dengan nama & mood."
+      );
+    });
+
+    $("#btnCopy").addEventListener("click", async ()=>{
+      setSubtitle(); setPreview();
+      const ok = await copyText(preview.textContent);
+      showToast(ok ? "✅ Ucapan disalin!" : "⚠️ Gagal menyalin");
+      beep();
+      burstHearts(10);
+    });
+
+    $("#btnShare").addEventListener("click", async ()=>{
+      setSubtitle(); setPreview();
+      const url = makeShareURL();
+      if(navigator.share){
+        try{
+          await navigator.share({ title: document.title, text:"Valentine Card 💘", url });
+          showToast("✅ Dibagikan!");
+          beep();
+          return;
+        }catch(e){}
+      }
+      const ok = await copyText(url);
+      showToast(ok ? "🔗 Link disalin!" : "⚠️ Gagal menyalin link");
+      beep();
+    });
+
+    // ===== Chips =====
+    document.querySelectorAll(".chip").forEach(ch=>{
+      ch.addEventListener("click", ()=>{
+        applyMood(ch.dataset.tpl);
+      });
+    });
+
+    // ===== Live update =====
+    nameInput.addEventListener("input", ()=>{
+      // Update template slightly if user hasn't customized too much:
+      // We'll just refresh preview + subtitle; message stays as user wrote.
+      setSubtitle();
+      setPreview();
+    });
+    moodSelect.addEventListener("change", ()=>{
+      // Switch mood but keep current message unless user wants template.
+      setSubtitle();
+      setPreview();
+      showToast("🎭 Mood diganti");
+      burstHearts(8);
+      beep();
+    });
+    msgInput.addEventListener("input", setPreview);
+
+    // ===== Init =====
+    syncFromURL();
+    setSubtitle();
+    setPreview();
+    loadCounter();
+
+    // soft ambient hearts
+    setInterval(()=> spawnHeart(Math.random()*window.innerWidth), 1200);
+  </script>
+</body>
+</html>
